@@ -66,6 +66,30 @@ Next.js on Vercel (UI + API routes) · Claude Agent SDK in TypeScript (orchestra
 `mcp-atlassian` (Jira) · `gh`/Octokit (PRs) · job queue for long runs (runs are minutes,
 not request-time) · Vercel Sandbox or Managed Agents for isolation.
 
+## Reference repositories
+
+Verified GitHub repos to study and build on (checked 2026-06-06), grouped by role in the pipeline.
+
+### Engine — Claude Agent SDK
+- [`anthropics/claude-agent-sdk-python`](https://github.com/anthropics/claude-agent-sdk-python) — Python SDK; the headless `query(...)` agent loop for a Path B worker.
+- [`anthropics/claude-agent-sdk-typescript`](https://github.com/anthropics/claude-agent-sdk-typescript) — TypeScript SDK; matches the recommended Next.js/TS stack.
+- [`anthropics/claude-agent-sdk-demos`](https://github.com/anthropics/claude-agent-sdk-demos) — official demos, incl. a multi-agent research system and an autonomous coding agent (initializer + coder, progress persisted via git).
+- [`anthropics/claude-code-action`](https://github.com/anthropics/claude-code-action) — GitHub Action that runs the agent on a runner; the backbone of Path A (also the source of the disclosed prompt-injection flaw — see Security).
+- [`anthropics/claude-quickstarts`](https://github.com/anthropics/claude-quickstarts) — deployable starter apps on the Claude API.
+- [`anthropics/claude-cookbooks`](https://github.com/anthropics/claude-cookbooks) — recipes for tool use, agents, and prompt patterns.
+
+### Jira / Atlassian integration
+- [`sooperset/mcp-atlassian`](https://github.com/sooperset/mcp-atlassian) — our chosen MCP server for Jira/Confluence (Cloud + Server, OAuth or API token); plugs into the SDK `mcpServers` option.
+
+### PR plumbing
+- [`octokit/octokit.js`](https://github.com/octokit/octokit.js) — official JS/TS GitHub client (matches the TS stack) for opening PRs.
+- [`PyGithub/PyGithub`](https://github.com/PyGithub/PyGithub) — Python GitHub client for a Python worker.
+- [`python-gitlab/python-gitlab`](https://github.com/python-gitlab/python-gitlab) — GitLab equivalent for non-GitHub targets.
+
+### Precedents / patterns
+- [`rpostulart/Claude-Project-Tracker`](https://github.com/rpostulart/Claude-Project-Tracker) — "Jira for AI agents": a `.project/` folder where the agent files its own tickets and decisions; a useful self-tracking pattern for long multi-session runs.
+- [OpenAI Codex Jira↔GitHub cookbook](https://developers.openai.com/cookbook/examples/codex/jira-github) — label-triggered Jira→PR flow via a coding agent in a GitHub Action; direct competitor/reference for Path A.
+
 ## Helper agents
 
 Seven subagents live in `.claude/agents/`, each owning one subsystem of the pipeline:
